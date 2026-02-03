@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Solar Interactivo</title>
+    <link rel="stylesheet" href="css/solar.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23ffcc00'/></svg>">
+    <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.8s;
+        }
+    </style>
+</head>
+<body>
+    <div class="universe">
+        <div class="stars" id="stars"></div>
+        <div class="solar-system" id="solarSystem">
+            <div class="sun" id="sun"></div>
+        </div>
+    </div>
+
+    <div class="info-card" id="infoCard"></div>
+
+    <div class="footer">Sistema Solar Interactivo • iscjoseluischavezg© 2026 • Datos: NASA</div>
+
+    <script src="js/solar.js"></script>
+    <script>
+        window.addEventListener('load', () => document.body.style.opacity = 1);
+    </script>
+</body>
+
+</html>
