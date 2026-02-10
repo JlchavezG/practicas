@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Login | Animado</title>
+</head>
+<body>
+    <audio id="switchSound" preload="auto">
+        <source src="switch.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento audio
+    </audio>
+    <svg width = "0" height= "0" style="position: absolute;">
+        <defs>
+            <path id="curve" d="M0,60 Q40,0 80,60" />
+        </defs>
+    </svg>
+    <div class="lamp-scene" tabindex="0" aria-label="Interruptor de lampara">
+        <div class="cord"></div>
+        <div class="lamp-base"></div>
+        <div class="bulb" id="bulb"></div>
+
+        <!-- Mensaje Curveado -->
+         <div id="lampMessage" class="lamp-message">
+            <svg width = "80" height= "60">
+                <text class="message-text">
+                    <textPath href="#curve">Clic</textPath>
+                </text>
+            </svg>
+         </div>
+    </div>
+    <div class="light-beam" id="lightBeam"></div>
+    <div class="floor"></div>
+
+    <div class="login-container" id="loginContainer">
+        <form id="loginFormEl">
+            <h2>Iniciar Sesion</h2>
+
+            <div class="input-group">
+                <label for="email">Correo Electronico</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" required>
+                <span class="toggle-password" id="togglePassword" tabindex="0" aria-label="Mostrar/ocultar contraseña">
+                    <i class="far fa-eye"></i>
+                </span>
+                <span class="validation-feedback valid">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+                <span class="validation-feedback invalid">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+            <a href="#" id="forgotLink" class="forgot">¿Olvidaste tu contraseña?</a>
+        </form>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>

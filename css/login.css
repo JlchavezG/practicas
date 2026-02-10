@@ -1,0 +1,306 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  padding-top: 40px;
+}
+
+.floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(to top, #080808 0%, transparent 100%);
+  z-index: 0;
+}
+
+/* === Lámpara fija y centrada === */
+.lamp-scene {
+  position: relative;
+  width: 56px;
+  height: 140px;
+  margin: 0 auto;
+  cursor: pointer;
+  outline: none;
+  z-index: 20;
+}
+
+.cord {
+  width: 2px;
+  height: 70px;
+  background: #555;
+  margin: 0 auto;
+}
+
+.lamp-base {
+  width: 30px;
+  height: 12px;
+  background: #333;
+  border-radius: 4px;
+  margin: 4px auto 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.bulb {
+  width: 56px;
+  height: 56px;
+  background: #202020;
+  border-radius: 50%;
+  border: 2px solid #444;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6);
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.bulb.on {
+  background: #fff;
+  border-color: #ccc;
+  box-shadow: 
+    inset 0 0 12px rgba(255, 255, 255, 0.9),
+    0 0 25px 10px rgba(255, 235, 160, 0.9),
+    0 0 50px 20px rgba(255, 200, 0, 0.5);
+}
+
+.bulb.flicker {
+  animation: flicker 0.8s ease-in-out;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  48%, 52% { opacity: 0.88; }
+  49%, 51% { opacity: 0.8; }
+}
+
+/* === Mensaje curvado debajo de la bombilla === */
+.lamp-message {
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 60px;
+  pointer-events: none;
+}
+
+.message-text {
+  font-size: 12px;
+  font-family: 'Segoe UI', sans-serif;
+  fill: #ffebc0;
+  filter: drop-shadow(0 0 6px rgba(255, 235, 160, 0.6));
+  transition: all 0.4s ease;
+  letter-spacing: 0.8px;
+}
+
+/* Estado apagado: invisible */
+.lamp-message.off .message-text {
+  fill: transparent;
+  filter: none;
+  opacity: 0;
+}
+
+/* === Haz de luz === */
+.light-beam {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 420px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 240, 180, 0.18) 0%,
+    transparent 75%
+  );
+  opacity: 0;
+  border-radius: 100% 100% 0 0;
+  transition: opacity 0.6s ease;
+  z-index: 5;
+}
+
+.light-beam.active {
+  opacity: 1;
+}
+
+/* === Formulario de login === */
+.login-container {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(12, 12, 12, 0.94);
+  backdrop-filter: blur(10px);
+  padding: 32px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 -16px 40px rgba(255, 235, 160, 0.35),
+    0 12px 30px rgba(0, 0, 0, 0.75),
+    inset 0 0 24px rgba(255, 245, 210, 0.15);
+}
+
+.login-container.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.login-container::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 26px;
+  background: rgba(0, 0, 0, 0.75);
+  filter: blur(10px);
+  opacity: 0;
+  transform: perspective(120px) rotateX(65deg) scaleY(0.35);
+  transform-origin: top;
+  transition: opacity 0.6s ease 0.2s;
+  z-index: -1;
+}
+
+.login-container.visible::after {
+  opacity: 0.7;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 235, 160, 0.3);
+}
+
+.input-group {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-size: 16px;
+  color: white;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #ff9800;
+  box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.3);
+}
+
+.input-group input.valid {
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.25);
+}
+
+.input-group input.invalid {
+  border-color: #f44336;
+  box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.25);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 36px;
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 3;
+  transition: color 0.2s;
+  outline: none;
+}
+
+.toggle-password:hover,
+.toggle-password:focus {
+  color: #ff9800;
+}
+
+.validation-feedback {
+  position: absolute;
+  right: 36px;
+  top: 36px;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 2;
+}
+
+.validation-feedback.show {
+  opacity: 1;
+}
+
+.validation-feedback.valid {
+  color: #4caf50;
+}
+
+.validation-feedback.invalid {
+  color: #f44336;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover,
+.btn:focus {
+  background: #f57c00;
+  box-shadow: 0 0 12px rgba(255, 152, 0, 0.4);
+  outline: none;
+}
+
+.forgot {
+  display: block;
+  text-align: right;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.forgot:hover,
+.forgot:focus {
+  color: #ff9800;
+  outline: none;
+}
